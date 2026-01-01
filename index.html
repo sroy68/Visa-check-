@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,6 @@
     body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:10px}
     .container{max-width:400px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,.2);overflow:hidden}
     .header{background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:20px;text-align:center;position:relative}
-    .content{padding:20px}
     .wallet-section{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;padding:20px;border-radius:20px;margin:20px 0;text-align:center}
     .plans-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0}
     @media (min-width:481px){.plans-grid{grid-template-columns:repeat(4,1fr)}}
@@ -40,7 +38,7 @@
       <p id="slotStatus">🔴 157 USA Slots LIVE</p>
     </div>
 
-    <!-- LANGUAGE + COUNTRY SELECTOR -->
+    <!-- COUNTRY + LANGUAGE -->
     <div class="selectors">
       <div class="select-container">
         <label><strong id="countryLabel">🌍 Country:</strong></label>
@@ -50,6 +48,9 @@
           <option value="uk">🇬🇧 UK</option>
           <option value="canada">🇨🇦 Canada</option>
           <option value="australia">🇦🇺 Australia</option>
+          <option value="russia">🇷🇺 Russia</option>
+          <option value="china">🇨🇳 China</option>
+          <option value="israel">🇮🇱 Israel</option>
         </select>
       </div>
       <div class="select-container">
@@ -58,16 +59,6 @@
           <option value="en">🇺🇸 English</option>
           <option value="hi">🇮🇳 Hindi</option>
           <option value="bn">🇧🇩 Bangla</option>
-        </select>
-        <select id="countrySelect">
-  <option value="india">🇮🇳 India</option>
-  <option value="usa">🇺🇸 USA</option>
-  <option value="uk">🇬🇧 UK</option>
-  <option value="canada">🇨🇦 Canada</option>
-  <option value="australia">🇦🇺 Australia</option>
-  <option value="russia">🇷🇺 Russia</option>
-  <option value="china">🇨🇳 China</option>
-  <option value="israel">🇮🇱 Israel</option>
         </select>
       </div>
     </div>
@@ -81,6 +72,7 @@
       🔒 Security: CHECKING...
     </div>
 
+    <!-- LIVE SLOTS -->
     <div class="live-slots">
       <h2 id="liveSlotsTitle">🔴 LIVE SLOTS</h2>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:15px 0">
@@ -99,18 +91,37 @@
       </div>
       <div>Last: <span id="lastUpdate"></span> | Next: <span id="nextCheck">30s</span></div>
       <button class="btn" onclick="forceCheckSlots()">🔄 Check LIVE</button>
-    </div>
-<div style="text-align:center;margin:15px 0">
-  <button class="btn" onclick="openOfficialVisaPortal()">
-    🌐 All Countries Visa Slot + Booking (Official)
+
+      <!-- OFFICIAL SLOT + BOOKING BUTTON -->
+      <div style="text-align:center;margin:15px 0">
+        <button class="btn" onclick="openOfficialVisaPortal()">
+          🌐 All Countries Visa Slot + Booking (Official)
+        </button>
+      </div>
+
+      <!-- শুধু booking charge কেটে অফিসিয়াল সাইটে নেয় -->
+      <div style="text-align:center;margin:5px 0">
+        <button class="btn" onclick="bookVisaSlot()">
+          🛂 Book Slot (₹49 from wallet)
+        </button>
+        <div style="text-align:center;margin:10px 0">
+  <button class="btn" onclick="checkVisaRealOrFake()">
+    ✅ Check Visa Real / Fake (Official)
   </button>
-</div>
+          <p style="font-size:12px;text-align:center;margin:5px 10px;opacity:.8">
+  🔐 Visa authenticity is checked ONLY on official embassy / government websites.
+  This site never stores your visa file or passport number.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- WALLET -->
     <div class="wallet-section">
       <h3 id="walletTitle">💰 Secure Wallet</h3>
       <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$450</div>
     </div>
 
-    <!-- PLANS + PAYMENT INSIDE BUTTON -->
+    <!-- PLANS + PAYMENT -->
     <div style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;padding:20px;border-radius:20px;margin:20px 0;text-align:center">
       <h3 id="discountLabel">🔍 Detecting Discount...</h3>
       <div class="plans-grid">
@@ -131,10 +142,13 @@
           <div id="plan12Label">12 Month</div>
         </div>
       </div>
+      <small style="display:block;margin-top:8px;opacity:.85">
+        🛂 Each booking uses ₹49 visa slot charge from wallet and redirects to official website.
+      </small>
     </div>
   </div>
 
-  <!-- বাহিরের JS ফাইল লিঙ্ক -->
+  <!-- EXTERNAL JS -->
   <script src="app.js"></script>
 </body>
 </html>
