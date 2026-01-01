@@ -92,29 +92,26 @@
       <div>Last: <span id="lastUpdate"></span> | Next: <span id="nextCheck">30s</span></div>
       <button class="btn" onclick="forceCheckSlots()">🔄 Check LIVE</button>
 
-      <!-- OFFICIAL SLOT + BOOKING BUTTON -->
+      <!-- OFFICIAL SLOT + BOOKING BUTTONS -->
       <div style="text-align:center;margin:15px 0">
         <button class="btn" onclick="openOfficialVisaPortal()">
           🌐 All Countries Visa Slot + Booking (Official)
         </button>
       </div>
 
-      <!-- শুধু booking charge কেটে অফিসিয়াল সাইটে নেয় -->
       <div style="text-align:center;margin:5px 0">
         <button class="btn" onclick="bookVisaSlot()">
           🛂 Book Slot (₹49 from wallet)
         </button>
-        <div style="text-align:center;margin:10px 0">
-  <button class="btn" onclick="checkVisaRealOrFake()">
-    ✅ Check Visa Real / Fake (Official)
-  </button>
-          <p style="font-size:12px;text-align:center;margin:5px 10px;opacity:.8">
-  🔐 Visa authenticity is checked ONLY on official embassy / government websites.
-  This site never stores your visa file or passport number.
-          </p>
-        </div>
+      </div>
+
+      <div style="text-align:center;margin:5px 0">
+        <button class="btn" onclick="checkVisaRealOrFake()">
+          ✅ Check Visa Real / Fake (Official)
+        </button>
       </div>
     </div>
+
     <!-- WALLET -->
     <div class="wallet-section">
       <h3 id="walletTitle">💰 Secure Wallet</h3>
@@ -145,6 +142,10 @@
       <small style="display:block;margin-top:8px;opacity:.85">
         🛂 Each booking uses ₹49 visa slot charge from wallet and redirects to official website.
       </small>
+      <p style="font-size:12px;text-align:center;margin:5px 10px;opacity:.8">
+        🔐 Visa authenticity is checked ONLY on official embassy / government websites.
+        This site never stores your visa file or passport number.
+      </p>
     </div>
   </div>
 
