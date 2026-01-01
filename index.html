@@ -3,45 +3,24 @@
 <head>
   <title>VisaLive - Secure Live Slots</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#10b981">
+  <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:10px}
-    .container{max-width:400px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 25px 50px rgba(0,0,0,.2);overflow:hidden}
-    .header{background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:20px;text-align:center;position:relative}
-    .wallet-section{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;padding:20px;border-radius:20px;margin:20px 0;text-align:center}
-    .plans-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0}
-    @media (min-width:481px){.plans-grid{grid-template-columns:repeat(4,1fr)}}
-    .plan-card{background:linear-gradient(135deg,#4c1d95,#7c3aed);padding:15px;border-radius:15px;text-align:center;cursor:pointer;transition:.3s;color:#fff}
-    .plan-card:active,.plan-card:hover{transform:scale(1.05)}
-    .backup-status,.live-slots,.security-bar{background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:15px;border-radius:15px;margin:10px 0;text-align:center}
-    .live-slots{background:linear-gradient(135deg,#ef4444,#dc2626)}
-    .security-bar{background:linear-gradient(135deg,#1f2937,#374151);color:#10b981;font-weight:700;font-size:14px}
-    .btn{background:linear-gradient(135deg,#ffd700,#fbbf24);color:#000;border:none;padding:12px 25px;border-radius:25px;font-weight:700;cursor:pointer;margin:5px;font-size:14px}
-    .btn:active{transform:scale(.95)}
-    .selectors{display:flex;gap:10px;justify-content:center;margin:15px 0;flex-wrap:wrap}
-    .select-container{background:rgba(255,255,255,.2);padding:10px;border-radius:15px;flex:1;min-width:120px}
-    .select-container select{width:100%;background:rgba(255,255,255,.9);border:1px solid #ddd;border-radius:10px;padding:8px 12px;font-size:14px;color:#333}
-    @media (max-width:480px){
-      .container{max-width:100%;border-radius:0}
-      .selectors{flex-direction:column}
-      .select-container{width:100%;max-width:300px}
-      .plans-grid{grid-template-columns:1fr}
-    }
-  </style>
+  <!-- external CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1 id="appTitle">🛂 VisaLive SECURE</h1>
-      <p id="slotStatus">🔴 157 USA Slots LIVE</p>
+      <h1 id="appTitle">VisaLive Dashboard</h1>
+      <p class="header-sub">
+        Secure multi‑country visa slot tracking & official booking redirect
+      </p>
     </div>
 
     <!-- COUNTRY + LANGUAGE -->
     <div class="selectors">
       <div class="select-container">
-        <label><strong id="countryLabel">🌍 Country:</strong></label>
+        <label id="countryLabel">Country</label>
         <select id="countrySelect">
           <option value="india">🇮🇳 India</option>
           <option value="usa">🇺🇸 USA</option>
@@ -54,102 +33,110 @@
         </select>
       </div>
       <div class="select-container">
-        <label><strong id="langLabel">🌐 Language:</strong></label>
+        <label id="langLabel">Language</label>
         <select id="langSelect">
           <option value="en">🇺🇸 English</option>
           <option value="hi">🇮🇳 Hindi</option>
           <option value="bn">🇧🇩 Bangla</option>
+          <option value="ru">🇷🇺 Russian</option>
+          <option value="zh">🇨🇳 Chinese</option>
         </select>
       </div>
     </div>
 
     <div class="backup-status">
-      <span id="backupLabel">💾 Data Safe</span> | <span id="backupTime"></span>
-      <button class="btn" onclick="manualBackup()">🔄 Sync</button>
+      <span id="backupLabel">Data Safe</span> • <span id="backupTime"></span>
+      <button class="btn" onclick="manualBackup()">Sync</button>
     </div>
 
     <div class="security-bar" id="securityStatus">
-      🔒 Security: CHECKING...
+      Security: CHECKING...
     </div>
 
     <!-- LIVE SLOTS -->
     <div class="live-slots">
-      <h2 id="liveSlotsTitle">🔴 LIVE SLOTS</h2>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:15px 0">
-        <div style="background:rgba(255,255,255,.3);padding:12px;border-radius:12px">
-          <div style="font-size:32px;font-weight:800;color:#ffd700" id="usaSlots">157</div>
-          <span id="usaLabel">🇺🇸 USA</span>
+      <div class="section-header">
+        <span id="liveSlotsTitle">Live visa slots</span>
+        <button class="small-btn" onclick="forceCheckSlots()">Refresh</button>
+      </div>
+
+      <div class="slots-grid">
+        <div class="slot-card">
+          <div class="slot-count" id="usaSlots">157</div>
+          <span id="usaLabel">USA</span>
         </div>
-        <div style="background:rgba(255,255,255,.3);padding:12px;border-radius:12px">
-          <div style="font-size:32px;font-weight:800;color:#ffd700" id="indiaSlots">423</div>
-          <span id="indiaLabel">🇮🇳 India</span>
+        <div class="slot-card">
+          <div class="slot-count" id="indiaSlots">423</div>
+          <span id="indiaLabel">India</span>
         </div>
-        <div style="background:rgba(255,255,255,.3);padding:12px;border-radius:12px">
-          <div style="font-size:32px;font-weight:800;color:#ffd700" id="canadaSlots">92</div>
-          <span id="canadaLabel">🇨🇦 Canada</span>
+        <div class="slot-card">
+          <div class="slot-count" id="canadaSlots">92</div>
+          <span id="canadaLabel">Canada</span>
         </div>
       </div>
-      <div>Last: <span id="lastUpdate"></span> | Next: <span id="nextCheck">30s</span></div>
-      <button class="btn" onclick="forceCheckSlots()">🔄 Check LIVE</button>
 
-      <!-- OFFICIAL SLOT + BOOKING BUTTONS -->
-      <div style="text-align:center;margin:15px 0">
+      <div class="slots-footer">
+        <span>Last update: <span id="lastUpdate"></span></span>
+        <span>Next check: <span id="nextCheck">30s</span></span>
+      </div>
+
+      <div class="btn-row">
         <button class="btn" onclick="openOfficialVisaPortal()">
-          🌐 All Countries Visa Slot + Booking (Official)
+          Open official visa website
         </button>
-      </div>
-
-      <div style="text-align:center;margin:5px 0">
         <button class="btn" onclick="bookVisaSlot()">
-          🛂 Book Slot (₹49 from wallet)
+          Pay ₹49 & continue to booking
         </button>
-      </div>
-
-      <div style="text-align:center;margin:5px 0">
-        <button class="btn" onclick="checkVisaRealOrFake()">
-          ✅ Check Visa Real / Fake (Official)
+        <button class="btn secondary" onclick="checkVisaRealOrFake()">
+          Verify visa on official site
         </button>
       </div>
     </div>
 
     <!-- WALLET -->
     <div class="wallet-section">
-      <h3 id="walletTitle">💰 Secure Wallet</h3>
-      <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$450</div>
+      <div class="section-header">
+        <span id="walletTitle">Wallet</span>
+      </div>
+      <div class="wallet-balance" id="walletBalance">$450</div>
     </div>
 
     <!-- PLANS + PAYMENT -->
-    <div style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;padding:20px;border-radius:20px;margin:20px 0;text-align:center">
-      <h3 id="discountLabel">🔍 Detecting Discount...</h3>
+    <div class="plans-section">
+      <div class="section-header">
+        <span id="plansTitle">Subscriptions</span>
+        <span class="discount-pill" id="discountLabel">Detecting discount…</span>
+      </div>
+
       <div class="plans-grid">
         <div class="plan-card" onclick="payAndBuyPlan('month1')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price1">$6</div>
-          <div id="plan1Label">1 Month</div>
+          <div class="plan-price" id="price1">$6</div>
+          <div class="plan-label" id="plan1Label">1 Month</div>
         </div>
         <div class="plan-card" onclick="payAndBuyPlan('month6')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price6">$30</div>
-          <div id="plan6Label">6 Month</div>
+          <div class="plan-price" id="price6">$30</div>
+          <div class="plan-label" id="plan6Label">6 Month</div>
         </div>
         <div class="plan-card" onclick="payAndBuyPlan('month9')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price9">$50</div>
-          <div id="plan9Label">9 Month</div>
+          <div class="plan-price" id="price9">$50</div>
+          <div class="plan-label" id="plan9Label">9 Month</div>
         </div>
         <div class="plan-card" onclick="payAndBuyPlan('month12')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price12">$60</div>
-          <div id="plan12Label">12 Month</div>
+          <div class="plan-price" id="price12">$60</div>
+          <div class="plan-label" id="plan12Label">12 Month</div>
         </div>
       </div>
-      <small style="display:block;margin-top:8px;opacity:.85">
-        🛂 Each booking uses ₹49 visa slot charge from wallet and redirects to official website.
-      </small>
-      <p style="font-size:12px;text-align:center;margin:5px 10px;opacity:.8">
-        🔐 Visa authenticity is checked ONLY on official embassy / government websites.
-        This site never stores your visa file or passport number.
+
+      <p class="hint">
+        Each slot booking uses ₹49 from wallet and then takes you to the official embassy / government website.
+      </p>
+      <p class="hint small">
+        Visa authenticity is verified only on official sites. This tool never stores your visa file or passport number.
       </p>
     </div>
   </div>
 
-  <!-- EXTERNAL JS -->
+  <!-- external JS -->
   <script src="app.js"></script>
 </body>
 </html>
