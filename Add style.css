@@ -1,0 +1,244 @@
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#0f172a;
+  color:#0f172a;
+  min-height:100vh;
+  padding:16px;
+}
+
+.container{
+  max-width:420px;
+  margin:0 auto;
+  background:#f9fafb;
+  border-radius:18px;
+  box-shadow:0 20px 45px rgba(15,23,42,.45);
+  overflow:hidden;
+}
+
+/* header */
+.header{
+  padding:18px 18px 14px;
+  background:linear-gradient(135deg,#0f766e,#0ea5e9);
+  color:#f9fafb;
+}
+.header h1{
+  font-size:22px;
+  font-weight:700;
+}
+.header-sub{
+  margin-top:4px;
+  font-size:12px;
+  opacity:.9;
+}
+
+/* selectors */
+.selectors{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin:14px 14px 4px;
+  padding:6px 8px;
+  background:#ffffff;
+  border-radius:999px;
+  box-shadow:0 10px 24px rgba(15,23,42,.15);
+}
+.select-container{
+  flex:1;
+}
+.select-container label{
+  display:block;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:#6b7280;
+  margin-bottom:2px;
+}
+.select-container select{
+  width:100%;
+  border:none;
+  background:transparent;
+  font-size:13px;
+  font-weight:600;
+  color:#0f172a;
+  padding:2px 4px;
+}
+
+.backup-status,
+.live-slots,
+.wallet-section,
+.plans-section{
+  margin:10px 14px;
+  border-radius:14px;
+  background:#ffffff;
+  padding:12px 14px;
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
+}
+
+/* backup */
+.backup-status{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:12px;
+  color:#4b5563;
+}
+
+/* security */
+.security-bar{
+  margin:0 14px 8px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#020617;
+  color:#a7f3d0;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* live slots */
+.live-slots{
+  background:#020617;
+  color:#e5e7eb;
+}
+.section-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.section-header span{
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.slots-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:10px;
+}
+.slot-card{
+  background:#0b1120;
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+.slot-count{
+  font-size:22px;
+  font-weight:700;
+  color:#22c55e;
+}
+.slots-footer{
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:#9ca3af;
+  margin-bottom:10px;
+}
+.btn-row{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* wallet */
+.wallet-section{
+  background:#ffffff;
+}
+.wallet-balance{
+  font-size:28px;
+  font-weight:700;
+  color:#0ea5e9;
+  margin-top:8px;
+}
+
+/* plans */
+.plans-section{
+  background:#ffffff;
+}
+.plans-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin:10px 0;
+}
+.plan-card{
+  background:radial-gradient(circle at top,#4c1d95,#1d1b3a);
+  border-radius:14px;
+  padding:10px;
+  text-align:center;
+  color:#f9fafb;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.plan-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(15,23,42,.4);
+}
+.plan-price{
+  font-size:20px;
+  font-weight:700;
+  color:#fde68a;
+}
+.plan-label{
+  font-size:13px;
+  margin-top:4px;
+}
+.discount-pill{
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:#ecfdf5;
+  color:#16a34a;
+}
+
+.hint{
+  font-size:11px;
+  color:#6b7280;
+  margin-top:4px;
+}
+.hint.small{
+  font-size:10px;
+}
+
+/* buttons */
+.btn{
+  border:none;
+  outline:none;
+  background:#0ea5e9;
+  color:#f9fafb;
+  padding:9px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+.btn.secondary{
+  background:#111827;
+  color:#e5e7eb;
+}
+.btn:active{
+  transform:scale(.97);
+}
+.small-btn{
+  border:none;
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:11px;
+  cursor:pointer;
+}
+
+/* responsive */
+@media (max-width:480px){
+  body{padding:0;background:#020617;}
+  .container{max-width:100%;border-radius:0;}
+  .plans-grid{grid-template-columns:1fr 1fr;}
+}
