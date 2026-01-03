@@ -67,6 +67,7 @@
       <h3 id="walletTitle">💰 Secure Wallet</h3>
       <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$0</div>
     </div>
+    <button class="btn" onclick="bookSlotNow()" style="margin-top:10px">🎫 Book Selected Slot</button>
       
 <script>
   // 🔥 GLOBAL VARIABLES
@@ -220,8 +221,7 @@
       document.getElementById('nextCheck').textContent = '30s';
       if (slotData.usa > 200) {
         alert(`🚨 USA SLOTS ALERT!
-🇺🇸 ${Math.floor(slotData.usa)} LIVE NOW!
-⚡ Buy Plan NOW!`);
+🇺🇸 ${Math.floor(slotData.usa)} LIVE NOW!`);
       }
     }, 1000);
   }
