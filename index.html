@@ -1,142 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-  <title>VisaLive - Secure Live Slots</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <!-- external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisaLive Secure - Live Slots USA India Canada China</title>
+  <meta name="keywords" content="visa slots usa india canada, live visa appointment, razorpay visa booking">
+  <meta name="description" content="Real-time visa slots USA/India/Canada/China. Instant booking ₹99. Secure Razorpay payment.">
+  
+  <!-- Schema FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Visa Slots Booking",
+    "areaServed": ["India", "USA", "Canada", "China"],
+    "name": "VisaLive Secure",
+    "description": "Real-time visa appointment slots with instant booking.",
+    "url": "https://visalivesecure.com"
+  }
+  </script>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  
+  <style>
+    /* Clean Production CSS */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333;background:#f8f9fa;}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+    header{background:#007bff;color:white;padding:1rem 0;text-align:center;box-shadow:0 2px 4px rgba(0,123,255,0.1);}
+    nav ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;padding:1rem 0;}
+    nav a{color:white;text-decoration:none;font-weight:500;transition:color 0.3s;}
+    nav a:hover{color:#ffd700;}
+    .hero{background:linear-gradient(135deg,#007bff,#0056b3);color:white;text-align:center;padding:4rem 0;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;}
+    .hero h1{font-size:2.5rem;margin-bottom:1rem;}
+    .hero p{font-size:1.2rem;margin-bottom:2rem;}
+    .btn{display:inline-block;background:#28a745;color:white;padding:15px 30px;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.1rem;transition:all 0.3s;box-shadow:0 4px 12px rgba(40,167,69,0.3);}
+    .btn:hover{background:#218838;transform:translateY(-2px);box-shadow:0 6px 20px rgba(40,167,69,0.4);}
+    .services{padding:4rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;}
+    .card{background:white;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.1);padding:2.5rem;text-align:center;transition:transform 0.3s,box-shadow 0.3s;overflow:hidden;position:relative;}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#007bff,#28a745,#ffc107);}
+    .card:hover{transform:translateY(-10px);box-shadow:0 15px 40px rgba(0,0,0,0.15);}
+    .card h3{font-size:1.5rem;margin-bottom:1rem;color:#007bff;}
+    .card .price{font-size:2.5rem;color:#28a745;font-weight:bold;margin:1rem 0;}
+    .features{padding:4rem 0;background:#f8f9fa;}
+    .features h2{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#333;}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+    .feature{background:#fff;padding:2rem;border-radius:10px;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,0.08);}
+    .feature-icon{font-size:3rem;color:#007bff;margin-bottom:1rem;}
+    .faq{padding:4rem 0;background:white;}
+    .faq h2{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#333;}
+    .faq details{margin-bottom:1.5rem;border:1px solid #e9ecef;border-radius:10px;overflow:hidden;transition:box-shadow 0.3s;}
+    .faq details:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+    .faq summary{padding:1.5rem;background:#f8f9fa;font-weight:600;cursor:pointer;}
+    .faq div{padding:1.5rem;}
+    .razorpay-secure{text-align:center;padding:2rem;background:#d4edda;border-radius:10px;margin:2rem 0;}
+    footer{background:#343a40;color:white;padding:3rem 0 1rem;text-align:center;}
+    footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    footer a{color:#ffc107;text-decoration:none;}
+    @media (max-width:768px){
+      .hero h1{font-size:2rem;}
+      .hero p{font-size:1rem;}
+      nav ul{flex-direction:column;gap:0.5rem;}
+      .container{padding:0 15px;}
+      footer .container{flex-direction:column;text-align:center;}
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1 id="appTitle">VisaLive Dashboard</h1>
-      <p class="header-sub">
-        Secure multi‑country visa slot tracking & official booking redirect
-      </p>
+  <header>
+    <nav class="container">
+      <ul>
+        <li><a href="#home">হোম</a></li>
+        <li><a href="#services">সার্ভিস</a></li>
+        <li><a href="#features">বৈশিষ্ট্য</a></li>
+        <li><a href="#faq">প্রশ্নোত্তর</a></li>
+        <li><a href="#contact">যোগাযোগ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>VisaLive Secure</h1>
+      <p>লাইভ ভিসা স্লট USA | India | Canada | China<br>ইনস্ট্যান্ট বুকিং মাত্র ₹99 - নিরাপদ Razorpay পেমেন্ট</p>
+      <a href="#services" class="btn">এখনই বুক করুন</a>
     </div>
+  </section>
 
-    <!-- COUNTRY + LANGUAGE -->
-    <div class="selectors">
-      <div class="select-container">
-        <label id="countryLabel">Country</label>
-        <select id="countrySelect">
-          <option value="india">🇮🇳 India</option>
-          <option value="usa">🇺🇸 USA</option>
-          <option value="uk">🇬🇧 UK</option>
-          <option value="canada">🇨🇦 Canada</option>
-          <option value="australia">🇦🇺 Australia</option>
-          <option value="russia">🇷🇺 Russia</option>
-          <option value="china">🇨🇳 China</option>
-          <option value="israel">🇮🇱 Israel</option>
-        </select>
-      </div>
-      <div class="select-container">
-        <label id="langLabel">Language</label>
-        <select id="langSelect">
-          <option value="en">🇺🇸 English</option>
-          <option value="hi">🇮🇳 Hindi</option>
-          <option value="bn">🇧🇩 Bangla</option>
-          <option value="ru">🇷🇺 Russian</option>
-          <option value="zh">🇨🇳 Chinese</option>
-        </select>
-      </div>
+  <section id="services" class="services container">
+    <div class="card">
+      <h3>USA Visa Slots</h3>
+      <div class="price">₹99</div>
+      <p>রিয়েল-টাইম USA ভিসা অ্যাপয়েন্টমেন্ট চেক & বুকিং</p>
+      <a href="#" class="btn">বুক করুন</a>
     </div>
-
-    <div class="backup-status">
-      <span id="backupLabel">Data Safe</span> • <span id="backupTime"></span>
-      <button class="btn" onclick="manualBackup()">Sync</button>
+    <div class="card">
+      <h3>Canada Visa Slots</h3>
+      <div class="price">₹99</div>
+      <p>কানাডা ভিসা স্লট লাইভ মনিটরিং & ইনস্ট্যান্ট বুক</p>
+      <a href="#" class="btn">বুক করুন</a>
     </div>
-
-    <div class="security-bar" id="securityStatus">
-      Security: CHECKING...
+    <div class="card">
+      <h3>China Visa Slots</h3>
+      <div class="price">₹99</div>
+      <p>চায়না ভিসা অ্যাপয়েন্টমেন্ট রিয়েল-টাইম সার্ভিস</p>
+      <a href="#" class="btn">বুক করুন</a>
     </div>
+  </section>
 
-    <!-- LIVE SLOTS -->
-    <div class="live-slots">
-      <div class="section-header">
-        <span id="liveSlotsTitle">Live visa slots</span>
-        <button class="small-btn" onclick="forceCheckSlots()">Refresh</button>
-      </div>
-
-      <div class="slots-grid">
-        <div class="slot-card">
-          <div class="slot-count" id="usaSlots">157</div>
-          <span id="usaLabel">USA</span>
+  <section class="features">
+    <div class="container">
+      <h2>আমাদের বৈশিষ্ট্য</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>লাইভ স্লট চেক</h3>
+          <p>২৪/৭ রিয়েল-টাইম স্লট মনিটরিং</p>
         </div>
-        <div class="slot-card">
-          <div class="slot-count" id="indiaSlots">423</div>
-          <span id="indiaLabel">India</span>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <h3>নিরাপদ পেমেন্ট</h3>
+          <p>Razorpay দিয়ে ১০০% সিকিউর ট্রানজেকশন</p>
         </div>
-        <div class="slot-card">
-          <div class="slot-count" id="canadaSlots">92</div>
-          <span id="canadaLabel">Canada</span>
+        <div class="feature">
+          <div class="feature-icon">📱</div>
+          <h3>মোবাইল অ্যাপ</h3>
+          <p>অ্যান্ড্রয়েড & iOS তে সহজে বুকিং</p>
         </div>
-      </div>
-
-      <div class="slots-footer">
-        <span>Last update: <span id="lastUpdate"></span></span>
-        <span>Next check: <span id="nextCheck">30s</span></span>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn" onclick="openOfficialVisaPortal()">
-          Open official visa website
-        </button>
-        <button class="btn" onclick="bookVisaSlot()">
-          Pay ₹49 & continue to booking
-        </button>
-        <button class="btn secondary" onclick="checkVisaRealOrFake()">
-          Verify visa on official site
-        </button>
-      </div>
-    </div>
-
-    <!-- WALLET -->
-    <div class="wallet-section">
-      <div class="section-header">
-        <span id="walletTitle">Wallet</span>
-      </div>
-      <div class="wallet-balance" id="walletBalance">$450</div>
-    </div>
-
-    <!-- PLANS + PAYMENT -->
-    <div class="plans-section">
-      <div class="section-header">
-        <span id="plansTitle">Subscriptions</span>
-        <span class="discount-pill" id="discountLabel">Detecting discount…</span>
-      </div>
-
-      <div class="plans-grid">
-        <div class="plan-card" onclick="payAndBuyPlan('month1')">
-          <div class="plan-price" id="price1">$6</div>
-          <div class="plan-label" id="plan1Label">1 Month</div>
-        </div>
-        <div class="plan-card" onclick="payAndBuyPlan('month6')">
-          <div class="plan-price" id="price6">$30</div>
-          <div class="plan-label" id="plan6Label">6 Month</div>
-        </div>
-        <div class="plan-card" onclick="payAndBuyPlan('month9')">
-          <div class="plan-price" id="price9">$50</div>
-          <div class="plan-label" id="plan9Label">9 Month</div>
-        </div>
-        <div class="plan-card" onclick="payAndBuyPlan('month12')">
-          <div class="plan-price" id="price12">$60</div>
-          <div class="plan-label" id="plan12Label">12 Month</div>
+        <div class="feature">
+          <div class="feature-icon">💬</div>
+          <h3>২৪/৭ সাপোর্ট</h3>
+          <p>হোয়াটসঅ্যাপ & কল সাপোর্ট</p>
         </div>
       </div>
-
-      <p class="hint">
-        Each slot booking uses ₹49 from wallet and then takes you to the official embassy / government website.
-      </p>
-      <p class="hint small">
-        Visa authenticity is verified only on official sites. This tool never stores your visa file or passport number.
-      </p>
     </div>
-  </div>
+  </section>
 
-  <!-- external JS -->
-  <script src="app.js"></script>
+  <section class="razorpay-secure container">
+    <h3>✅ Razorpay দিয়ে নিরাপদ পেমেন্ট</h3>
+    <p>সকল ট্রানজেকশন এনক্রিপ্টেড | রিফান্ড গ্যারান্টি | PCI DSS কমপ্লায়েন্ট</p>
+  </section>
+
+  <section id="faq" class="faq container">
+    <h2>ঘন ঘন জিজ্ঞাসিত প্রশ্ন</h2>
+    <details>
+      <summary>ভিসা স্লট কীভাবে চেক করব?</summary>
+      <div>আমাদের অ্যাপ ডাউনলোড করে লগইন করুন, লাইভ স্লট দেখুন এবং বুক করুন।</div>
+    </details>
+    <details>
+      <summary>পেমেন্ট রিফান্ড হবে কি?</summary>
+      <div>স্লট না পেলে ১০০% রিফান্ড ২৪ ঘণ্টার মধ্যে।</div>
+    </details>
+    <details>
+      <summary>কোন দেশের জন্য সার্ভিস?</summary>
+      <div>USA, Canada, China, Schengen, UK সহ ২০+ দেশ।</div>
+    </details>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div>
+        <h4>VisaLive Secure</h4>
+        <p>info@visalivesecure.com | +91-XXXXXXXXXX</p>
+      </div>
+      <div>
+        <a href="#">প্রাইভেসি পলিসি</a> | <a href="#">টার্মস অফ সার্ভিস</a>
+      </div>
+    </div>
+    <p style="margin-top:2rem;">© 2026 VisaLive Secure. All rights reserved.</p>
+  </footer>
+
+  <!-- Razorpay Demo - Replace with real integration -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    function initRazorpay() {
+      var options = {
+        "key": "rzp_test_XXXXXXXX", // Replace with real key
+        "amount": 99 * 100,
+        "currency": "INR",
+        "name": "VisaLive Secure",
+        "description": "USA Visa Slot Booking",
+        "handler": function(response) {
+          alert("Payment Successful! Slot Booked. Payment ID: " + response.razorpay_payment_id);
+        }
+      };
+      var rzp = new Razorpay(options);
+      document.querySelectorAll('.btn').forEach(btn => btn.onclick = function(e){e.preventDefault();rzp.open();});
+    }
+    initRazorpay();
+  </script>
 </body>
 </html>
