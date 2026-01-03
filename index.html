@@ -1,24 +1,11 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="En">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VisaLive Secure - Live Slots USA India Canada China</title>
   <meta name="keywords" content="visa slots usa india canada, live visa appointment, razorpay visa booking">
   <meta name="description" content="Real-time visa slots USA/India/Canada/China. Instant booking ₹99. Secure Razorpay payment.">
-  
-  <!-- Schema FAQ -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Visa Slots Booking",
-    "areaServed": ["India", "USA", "Canada", "China"],
-    "name": "VisaLive Secure",
-    "description": "Real-time visa appointment slots with instant booking.",
-    "url": "https://visalivesecure.com"
-  }
-  </script>
   
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -178,24 +165,6 @@
     <p style="margin-top:2rem;">© 2026 VisaLive Secure. All rights reserved.</p>
   </footer>
 
-  <!-- Razorpay Demo - Replace with real integration -->
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script>
-    function initRazorpay() {
-      var options = {
-        "key": "rzp_test_XXXXXXXX", // Replace with real key
-        "amount": 99 * 100,
-        "currency": "INR",
-        "name": "VisaLive Secure",
-        "description": "USA Visa Slot Booking",
-        "handler": function(response) {
-          alert("Payment Successful! Slot Booked. Payment ID: " + response.razorpay_payment_id);
-        }
-      };
-      var rzp = new Razorpay(options);
-      document.querySelectorAll('.btn').forEach(btn => btn.onclick = function(e){e.preventDefault();rzp.open();});
-    }
-    initRazorpay();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
