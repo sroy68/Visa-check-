@@ -72,35 +72,24 @@
       <button class="btn" onclick="payRazorpay()" style="padding:15px 30px;font-size:16px;background:#667eea;color:white;margin:10px 0">
     💳 Pay $6 Secure Razorpay
   </button>
-  
-      <button class="btn" onclick="verifyPhonePeSecure()" style="padding:15px 30px;font-size:16px">✅ Payment Done</button>
-    </div>
     
     <div style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;padding:20px;border-radius:20px;margin:20px 0;text-align:center">
       <h3 id="discountLabel">🔍 Detecting Discount...</h3>
       <div class="plans-grid">
-        <div class="plan-card" onclick="buyPlan('month1')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price1">$6</div>
-          <div id="plan1Label">1 Month</div>
+        
         </div>
-        <div class="plan-card" onclick="buyPlan('month6')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price6">$30</div>
-          <div id="plan6Label">6 Month</div>
+        
         </div>
-        <div class="plan-card" onclick="buyPlan('month9')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price9">$50</div>
-          <div id="plan9Label">9 Month</div>
+        
         </div>
-        <div class="plan-card" onclick="buyPlan('month12')">
-          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price12">$60</div>
-          <div id="plan12Label">12 Month</div>
+        
         </div>
       </div>
     </div>
   </div>
 <script>
   // 🔥 GLOBAL VARIABLES
-  let currentUser = { balance: 450 };
+  let currentUser = { balance: 0 };
   let slotData = { usa: 157, india: 423, canada: 92 };
   let currentLang = 'en';
   let currentCountry = 'india';
@@ -206,34 +195,7 @@
     updateLanguage();
   }
 
-  // 💰 PRICES + DISCOUNTS
-  const basePrices = { month1: 6, month6: 30, month9: 50, month12: 60 };
-
-  function updateDiscount() {
-    let rate = 0;
-    if (currentCountry === 'india') rate = 0.25;
-
-    const isStudent = confirm('Are you a student (18-25)? If YES, press OK for 40% OFF.');
-    if (isStudent && currentCountry === 'india') rate = 0.40;
-
-    discount = {
-      rate: rate,
-      label:
-        rate === 0.40
-          ? '🇮🇳🎓 40% STUDENT OFF'
-          : rate === 0.25
-          ? '🇮🇳 25% OFF'
-          : 'Standard Price'
-    };
-
-    document.getElementById('discountLabel').textContent = discount.label;
-
-    ['1', '6', '9', '12'].forEach(i => {
-      const plan = 'month' + i;
-      const price = Math.round(basePrices[plan] * (1 - discount.rate) * 100) / 100;
-      document.getElementById('price' + i).textContent = '$' + price;
-    });
-  }
+  
 
   // 🧮 SIMPLE HASH (LOCAL TAMPER DETECTION)
   function simpleHash(str) {
@@ -271,30 +233,7 @@
     }
   }
 
-  // 🅿️ PHONEPE PAYMENT – রেট লিমিট + ভ্যালিডেশন
-  let txidAttempts = 0;
-  let lastTxTime = 0;
-
-  function verifyPhonePeSecure() {
-    const now = Date.now();
-    if (now - lastTxTime < 5000) {
-      alert('⏳ Please wait a few seconds before trying again.');
-      return;
-    }
-    if (txidAttempts >= 5) {
-      alert('🚫 Too many attempts! Please try later.');
-      return;
-    }
-
-    const txid = prompt('Enter TXID (Last 8–12 digits):');
-    if (!txid || !/^d{8,12}$/.test(txid)) {
-      txidAttempts++;
-      alert('❌ Invalid TXID! Must be 8–12 digits.');
-      return;
-    }
-
-    lastTxTime = now;
-    txidAttempts = 0;
+  
 
     // NOTE: এখানে আসলে সার্ভার কল করে TXID ভেরিফাই করা দরকার
     currentUser.balance += 6;
@@ -304,22 +243,7 @@
     alert('✅ $6 Added! New Balance: $' + Math.floor(currentUser.balance));
   }
 
-  // 💳 BUY PLAN
-  function buyPlan(plan) {
-    const price = Math.round(basePrices[plan] * (1 - discount.rate) * 100) / 100;
-    if (currentUser.balance >= price) {
-      currentUser.balance -= price;
-      document.getElementById('walletBalance').textContent =
-        '$' + Math.floor(currentUser.balance);
-      secureSaveUser();
-      alert(`✅ ${plan.toUpperCase()} ACTIVE!
-💰 $${price} deducted
-💳 New Balance: $${Math.floor(currentUser.balance)}`);
-    } else {
-      alert('❌ Low Balance! Recharge PhonePe first');
-      document.querySelector('.qr-section').scrollIntoView();
-    }
-  }
+
 
   // 🔴 LIVE SLOTS UPDATE
   function updateLiveCounters() {
