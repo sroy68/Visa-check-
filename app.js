@@ -41,12 +41,6 @@ class VisaLiveSecure {
       });
     });
 
-    // WhatsApp support
-    document.getElementById('whatsapp-btn')?.addEventListener('click', () => {
-      window.open('https://wa.me/91XXXXXXXXXX?text=Visa%20slot%20help', '_blank');
-    });
-  }
-
   // User Data Management
   loadUserData() {
     try {
