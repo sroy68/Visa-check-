@@ -68,14 +68,39 @@
       <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$450</div>
     </div>
     
+    <div class="qr-section">
+      <button class="btn" onclick="payRazorpay()" style="padding:15px 30px;font-size:16px;background:#667eea;color:white;margin:10px 0">
+    💳 Pay $6 Secure Razorpay
+  </button>
+  
+      <button class="btn" onclick="verifyPhonePeSecure()" style="padding:15px 30px;font-size:16px">✅ Payment Done</button>
+    </div>
+    
     <div style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;padding:20px;border-radius:20px;margin:20px 0;text-align:center">
       <h3 id="discountLabel">🔍 Detecting Discount...</h3>
       <div class="plans-grid">
-          </div>
-        
+        <div class="plan-card" onclick="buyPlan('month1')">
+          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price1">$6</div>
+          <div id="plan1Label">1 Month</div>
+        </div>
+        <div class="plan-card" onclick="buyPlan('month6')">
+          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price6">$30</div>
+          <div id="plan6Label">6 Month</div>
+        </div>
+        <div class="plan-card" onclick="buyPlan('month9')">
+          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price9">$50</div>
+          <div id="plan9Label">9 Month</div>
+        </div>
+        <div class="plan-card" onclick="buyPlan('month12')">
+          <div style="font-size:22px;color:#ffd700;font-weight:800" id="price12">$60</div>
+          <div id="plan12Label">12 Month</div>
+        </div>
+      </div>
+    </div>
+  </div>
 <script>
   // 🔥 GLOBAL VARIABLES
-  let currentUser = { balance: 0 };
+  let currentUser = { balance: 450 };
   let slotData = { usa: 157, india: 423, canada: 92 };
   let currentLang = 'en';
   let currentCountry = 'india';
@@ -93,8 +118,13 @@
       indiaLabel: '🇮🇳 India',
       canadaLabel: '🇨🇦 Canada',
       walletTitle: '💰 Secure Wallet',
+      phonepeTitle: '🅿️ PhonePe Recharge',
       qrAmount: '$6 → Instant Wallet Credit',
       paymentBtn: '✅ Payment Done - Add $6',
+      plan1Label: '1 Month',
+      plan6Label: '6 Month',
+      plan9Label: '9 Month',
+      plan12Label: '12 Month'
     },
     hi: {
       appTitle: '🛂 वीजाLive सुरक्षित',
@@ -106,8 +136,13 @@
       indiaLabel: '🇮🇳 भारत',
       canadaLabel: '🇨🇦 कनाडा',
       walletTitle: '💰 सुरक्षित वॉलेट',
+      phonepeTitle: '🅿️ फोनपे रिचार्ज',
       qrAmount: '$6 → तुरंत वॉलेट',
       paymentBtn: '✅ भुगतान हो गया',
+      plan1Label: '1 महीना',
+      plan6Label: '6 महीने',
+      plan9Label: '9 महीने',
+      plan12Label: '12 महीने'
     },
     bn: {
       appTitle: '🛂 ভিসাLাইভ সিকিউর',
@@ -119,8 +154,13 @@
       indiaLabel: '🇮🇳 ভারত',
       canadaLabel: '🇨🇦 কানাডা',
       walletTitle: '💰 নিরাপদ ওয়ালেট',
+      phonepeTitle: '🅿️ ফোনপে রিচার্জ',
       qrAmount: '$6 → তাৎক্ষণিক ওয়ালেট',
       paymentBtn: '✅ পেমেন্ট সম্পন্ন',
+      plan1Label: '১ মাস',
+      plan6Label: '৬ মাস',
+      plan9Label: '৯ মাস',
+      plan12Label: '১২ মাস'
     }
   };
 
@@ -166,7 +206,6 @@
     updateLanguage();
   }
 
-  
 
   // 🧮 SIMPLE HASH (LOCAL TAMPER DETECTION)
   function simpleHash(str) {
@@ -204,7 +243,30 @@
     }
   }
 
-  
+  // 🅿️ PHONEPE PAYMENT – রেট লিমিট + ভ্যালিডেশন
+  let txidAttempts = 0;
+  let lastTxTime = 0;
+
+  function verifyPhonePeSecure() {
+    const now = Date.now();
+    if (now - lastTxTime < 5000) {
+      alert('⏳ Please wait a few seconds before trying again.');
+      return;
+    }
+    if (txidAttempts >= 5) {
+      alert('🚫 Too many attempts! Please try later.');
+      return;
+    }
+
+    const txid = prompt('Enter TXID (Last 8–12 digits):');
+    if (!txid || !/^d{8,12}$/.test(txid)) {
+      txidAttempts++;
+      alert('❌ Invalid TXID! Must be 8–12 digits.');
+      return;
+    }
+
+    lastTxTime = now;
+    txidAttempts = 0;
 
     // NOTE: এখানে আসলে সার্ভার কল করে TXID ভেরিফাই করা দরকার
     currentUser.balance += 6;
@@ -214,7 +276,22 @@
     alert('✅ $6 Added! New Balance: $' + Math.floor(currentUser.balance));
   }
 
-
+  // 💳 BUY PLAN
+  function buyPlan(plan) {
+    const price = Math.round(basePrices[plan] * (1 - discount.rate) * 100) / 100;
+    if (currentUser.balance >= price) {
+      currentUser.balance -= price;
+      document.getElementById('walletBalance').textContent =
+        '$' + Math.floor(currentUser.balance);
+      secureSaveUser();
+      alert(`✅ ${plan.toUpperCase()} ACTIVE!
+💰 $${price} deducted
+💳 New Balance: $${Math.floor(currentUser.balance)}`);
+    } else {
+      alert('❌ Low Balance! Recharge PhonePe first');
+      document.querySelector('.qr-section').scrollIntoView();
+    }
+  }
 
   // 🔴 LIVE SLOTS UPDATE
   function updateLiveCounters() {
@@ -234,7 +311,8 @@
       document.getElementById('nextCheck').textContent = '30s';
       if (slotData.usa > 200) {
         alert(`🚨 USA SLOTS ALERT!
-🇺🇸 ${Math.floor(slotData.usa)} LIVE NOW!`);
+🇺🇸 ${Math.floor(slotData.usa)} LIVE NOW!
+⚡ Buy Plan NOW!`);
       }
     }, 1000);
   }
@@ -302,69 +380,4 @@
       .getElementById('langSelect')
       .addEventListener('change', changeLanguage);
   };
-</script> 
-      <section class="features">
-    <div class="container">
-      <h2>আমাদের বৈশিষ্ট্য</h2>
-      <div class="feature-grid">
-        <div class="feature">
-          <div class="feature-icon">⚡</div>
-          <h3>লাইভ স্লট চেক</h3>
-          <p>২৪/৭ রিয়েল-টাইম স্লট মনিটরিং</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🔒</div>
-          <h3>নিরাপদ পেমেন্ট</h3>
-          <p>Razorpay দিয়ে ১০০% সিকিউর ট্রানজেকশন</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">📱</div>
-          <h3>মোবাইল অ্যাপ</h3>
-          <p>অ্যান্ড্রয়েড & iOS তে সহজে বুকিং</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">💬</div>
-          <h3>২৪/৭ সাপোর্ট</h3>
-          <p>হোয়াটসঅ্যাপ & কল সাপোর্ট</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="razorpay-secure container">
-    <h3>✅ Razorpay দিয়ে নিরাপদ পেমেন্ট</h3>
-    <p>সকল ট্রানজেকশন এনক্রিপ্টেড | রিফান্ড গ্যারান্টি | PCI DSS কমপ্লায়েন্ট</p>
-  </section>
-
-  <section id="faq" class="faq container">
-    <h2>ঘন ঘন জিজ্ঞাসিত প্রশ্ন</h2>
-    <details>
-      <summary>ভিসা স্লট কীভাবে চেক করব?</summary>
-      <div>আমাদের অ্যাপ ডাউনলোড করে লগইন করুন, লাইভ স্লট দেখুন এবং বুক করুন।</div>
-    </details>
-    <details>
-      <summary>পেমেন্ট রিফান্ড হবে কি?</summary>
-      <div>স্লট না পেলে ১০০% রিফান্ড ২৪ ঘণ্টার মধ্যে।</div>
-    </details>
-    <details>
-      <summary>কোন দেশের জন্য সার্ভিস?</summary>
-      <div>USA, Canada, China, Schengen, UK সহ ২০+ দেশ।</div>
-    </details>
-  </section>
-
-  <footer id="contact">
-    <div class="container">
-      <div>
-        <h4>VisaLive Secure</h4>
-        <p>info@visalivesecure.com | +91-XXXXXXXXXX</p>
-      </div>
-      <div>
-        <a href="#">প্রাইভেসি পলিসি</a> | <a href="#">টার্মস অফ সার্ভিস</a>
-      </div>
-    </div>
-    <p style="margin-top:2rem;">© 2026 VisaLive Secure. All rights reserved.</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</script>
