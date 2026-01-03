@@ -15,9 +15,27 @@ class VisaLiveSecure {
     this.initAnimations();
     console.log('VisaLive Secure initialized');
   }
-
+  // User Data Management
+loadUserData() {
+    try {
+      const userData = localStorage.getItem('visalivesecure_user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        this.showUserDashboard(user);
+      }
+    } catch (e) {
+      console.error('User data load error:', e);
+    }
+  }
+  saveUserData(userData) {
+    try {
+      localStorage.setItem('visalivesecure_user', JSON.stringify(userData));
+    } catch (e) {
+      console.error('User data save error:', e);
+    }
+  }
   // Event Bindings
-  bindEvents() {}
+  bindEvents() {
     // Navigation smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', (e) => {
@@ -28,7 +46,7 @@ class VisaLiveSecure {
         }
       });
     });
-
+  }
     // Booking buttons
     document.querySelectorAll('.btn.book').forEach(btn => {
       btn.addEventListener('click', (e) => this.handleBooking(e));
@@ -40,27 +58,6 @@ class VisaLiveSecure {
         detail.style.height = detail.open ? 'auto' : '60px';
       });
     });
-
-  // User Data Management
-  loadUserData() {
-    try {
-      const userData = localStorage.getItem('visalivesecure_user');
-      if (userData) {
-        const user = JSON.parse(userData);
-        this.showUserDashboard(user);
-      }
-    } catch (e) {
-      console.error('User data load error:', e);
-    }
-  }
-
-  saveUserData(userData) {
-    try {
-      localStorage.setItem('visalivesecure_user', JSON.stringify(userData));
-    } catch (e) {
-      console.error('User data save error:', e);
-    }
-  }
 
   // Real-time Slot Monitor (WebSocket + Polling fallback)
   async startSlotMonitor() {
