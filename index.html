@@ -65,7 +65,7 @@
     
     <div class="wallet-section">
       <h3 id="walletTitle">💰 Secure Wallet</h3>
-      <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$450</div>
+      <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$0</div>
     </div>
       
 <script>
@@ -88,13 +88,6 @@
       indiaLabel: '🇮🇳 India',
       canadaLabel: '🇨🇦 Canada',
       walletTitle: '💰 Secure Wallet',
-      phonepeTitle: '🅿️ PhonePe Recharge',
-      qrAmount: '$6 → Instant Wallet Credit',
-      paymentBtn: '✅ Payment Done - Add $6',
-      plan1Label: '1 Month',
-      plan6Label: '6 Month',
-      plan9Label: '9 Month',
-      plan12Label: '12 Month'
     },
     hi: {
       appTitle: '🛂 वीजाLive सुरक्षित',
@@ -106,13 +99,6 @@
       indiaLabel: '🇮🇳 भारत',
       canadaLabel: '🇨🇦 कनाडा',
       walletTitle: '💰 सुरक्षित वॉलेट',
-      phonepeTitle: '🅿️ फोनपे रिचार्ज',
-      qrAmount: '$6 → तुरंत वॉलेट',
-      paymentBtn: '✅ भुगतान हो गया',
-      plan1Label: '1 महीना',
-      plan6Label: '6 महीने',
-      plan9Label: '9 महीने',
-      plan12Label: '12 महीने'
     },
     bn: {
       appTitle: '🛂 ভিসাLাইভ সিকিউর',
@@ -124,13 +110,6 @@
       indiaLabel: '🇮🇳 ভারত',
       canadaLabel: '🇨🇦 কানাডা',
       walletTitle: '💰 নিরাপদ ওয়ালেট',
-      phonepeTitle: '🅿️ ফোনপে রিচার্জ',
-      qrAmount: '$6 → তাৎক্ষণিক ওয়ালেট',
-      paymentBtn: '✅ পেমেন্ট সম্পন্ন',
-      plan1Label: '১ মাস',
-      plan6Label: '৬ মাস',
-      plan9Label: '৯ মাস',
-      plan12Label: '১২ মাস'
     }
   };
 
@@ -213,30 +192,6 @@
     }
   }
 
-  // 🅿️ PHONEPE PAYMENT – রেট লিমিট + ভ্যালিডেশন
-  let txidAttempts = 0;
-  let lastTxTime = 0;
-
-  function verifyPhonePeSecure() {
-    const now = Date.now();
-    if (now - lastTxTime < 5000) {
-      alert('⏳ Please wait a few seconds before trying again.');
-      return;
-    }
-    if (txidAttempts >= 5) {
-      alert('🚫 Too many attempts! Please try later.');
-      return;
-    }
-
-    const txid = prompt('Enter TXID (Last 8–12 digits):');
-    if (!txid || !/^d{8,12}$/.test(txid)) {
-      txidAttempts++;
-      alert('❌ Invalid TXID! Must be 8–12 digits.');
-      return;
-    }
-
-    lastTxTime = now;
-    txidAttempts = 0;
 
     // NOTE: এখানে আসলে সার্ভার কল করে TXID ভেরিফাই করা দরকার
     currentUser.balance += 6;
@@ -246,22 +201,6 @@
     alert('✅ $6 Added! New Balance: $' + Math.floor(currentUser.balance));
   }
 
-  // 💳 BUY PLAN
-  function buyPlan(plan) {
-    const price = Math.round(basePrices[plan] * (1 - discount.rate) * 100) / 100;
-    if (currentUser.balance >= price) {
-      currentUser.balance -= price;
-      document.getElementById('walletBalance').textContent =
-        '$' + Math.floor(currentUser.balance);
-      secureSaveUser();
-      alert(`✅ ${plan.toUpperCase()} ACTIVE!
-💰 $${price} deducted
-💳 New Balance: $${Math.floor(currentUser.balance)}`);
-    } else {
-      alert('❌ Low Balance! Recharge PhonePe first');
-      document.querySelector('.qr-section').scrollIntoView();
-    }
-  }
 
   // 🔴 LIVE SLOTS UPDATE
   function updateLiveCounters() {
