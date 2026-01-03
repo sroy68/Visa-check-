@@ -17,7 +17,7 @@ class VisaLiveSecure {
   }
 
   // Event Bindings
-  bindEvents() {
+  bindEvents() {}
     // Navigation smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', (e) => {
