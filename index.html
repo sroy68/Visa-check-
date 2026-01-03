@@ -67,15 +67,10 @@
       <h3 id="walletTitle">💰 Secure Wallet</h3>
       <div style="font-size:28px;font-weight:800;color:#ffd700" id="walletBalance">$450</div>
     </div>
-    
-    <div class="qr-section">
-      <button class="btn" onclick="payRazorpay()" style="padding:15px 30px;font-size:16px;background:#667eea;color:white;margin:10px 0">
-    💳 Pay $6 Secure Razorpay
-  </button>
       
 <script>
   // 🔥 GLOBAL VARIABLES
-  let currentUser = { balance: 450 };
+  let currentUser = { balance: 0 };
   let slotData = { usa: 157, india: 423, canada: 92 };
   let currentLang = 'en';
   let currentCountry = 'india';
